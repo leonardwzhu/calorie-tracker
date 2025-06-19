@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="theme-color" content="#2ecc71" />
+        <!-- link to manifest and stylesheet -->
+        <link rel="manifest" href="manifest.json">
+        <link rel="stylesheet" href="style.css">
+        <link rel="apple-touch-icon" href="icon-192.png">
+        <title>my calorie tracker</title>
+    </head>
+    <body>
+        <div class="container">
+            <h1>calorie tracker</h1>
+            
+            <!-- input for setting daily calorie goal -->
+            <div class="goal">
+                <label for="goal">daily goal (cal):</label>
+                <input type="number" id="goal" placeholder="e.g. 1800">
+            </div>
+            
+            <!-- input fields for adding a meal with macros -->
+            <div class="add-meal">
+                <input type="text" id="food" placeholder="food">
+                <input type="number" id="calories" placeholder="calories">
+                <input type="number" id="protein" placeholder="protein (g)">
+                <input type="number" id="carbs" placeholder="carbs (g)">
+                <input type="number" id="fat" placeholder="fat (g)">
+                <button onclick="addmeal()">add meal</button>
+            </div>
+            
+            <!-- section to display total calorie intake -->
+            <h2>today's intake: <span id="total">0</span> / <span id="display-goal">0</span> cal</h2>
+
+            <div class="progress-bar-container">
+                <div id="calorie-progress" class="progress-bar-fill"></div>
+            </div>
+            
+            <div class="macro-summary">
+                protein: <span id="protein-total">0</span>g &nbsp; | &nbsp;
+                carbs: <span id="carbs-total">0</span>g &nbsp; | &nbsp;
+                fat: <span id="fat-total">0</span>g
+            </div>  
+            
+            <div class="reset-container">
+                <button onclick="resetday()">reset today</button>
+            </div>
+
+            
+            <!-- list of meals logged -->
+            <ul id="meal-list"></ul>
+        </div>
+        
+        <!-- load javascript file -->
+        <script src="app.js"></script>
+        <script>
+            // register service worker if available
+            if ('serviceWorker' in navigator){
+                navigator.serviceWorker.register('service-worker.js');
+            }
+        </script>
+    </body>
+</html>
